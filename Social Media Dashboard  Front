@@ -1,0 +1,45 @@
+import { useState, useEffect } from 'react';
+import Chart from 'chart.js/auto';
+
+export default function Dashboard() {
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    fetch('http://localhost:5000/api/stats')
+      .then((res) => res.json())
+      .then((data) => setData(data));
+  }, []);
+
+  useEffect(() => {
+    if (data.length > 0) {
+      const ctx = document.getElementById('myChart').getContext('2d');
+      new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: data.map((d) => new Date(d.date).toLocaleDateString()),
+          datasets: [
+            {
+              label: 'Followers',
+              data: data.map((d) => d.followers),
+              borderColor: 'blue',
+              fill: false,
+            },
+            {
+              label: 'Engagement',
+              data: data.map((d) => d.engagement),
+              borderColor: 'red',
+              fill: false,
+            },
+          ],
+        },
+      });
+    }
+  }, [data]);
+
+  return (
+    <div className="p-5">
+      <h1 className="text-2xl font-bold">📊 Social Media Dashboard</h1>
+      <canvas id="myChart" width="400" height="200"></canvas>
+    </div>
+  );
+}
