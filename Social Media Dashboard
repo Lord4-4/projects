@@ -1,0 +1,38 @@
+#backend
+const express = require('express');
+const cors = require('cors');
+const mongoose = require('mongoose');
+const dotenv = require('dotenv');
+
+dotenv.config();
+const app = express();
+app.use(cors());
+app.use(express.json());
+
+// MongoDB Connection
+mongoose.connect(process.env.MONGO_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
+
+const SocialDataSchema = new mongoose.Schema({
+  platform: String,
+  followers: Number,
+  engagement: Number,
+  date: { type: Date, default: Date.now },
+});
+
+const SocialData = mongoose.model('SocialData', SocialDataSchema);
+
+app.get('/api/stats', async (req, res) => {
+  const data = await SocialData.find();
+  res.json(data);
+});
+
+app.post('/api/stats', async (req, res) => {
+  const newData = new SocialData(req.body);
+  await newData.save();
+  res.status(201).json(newData);
+});
+
+app.listen(5000, () => console.log('Server running on port 5000'));
