@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/scrollreveal/4.0.9/scrollreveal.min.js"></script>
+    <style>
+        body {
+            background: linear-gradient(135deg, #1e1e2f, #3a3a5e, #29293d);
+            color: #e0e0e0;
+            font-family: 'Poppins', sans-serif;
+            overflow-x: hidden;
+            transition: background 0.5s ease-in-out;
+        }
+        header {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            text-align: center;
+            animation: fadeInDown 1s ease-in-out;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+        }
+        nav ul li {
+            display: inline;
+            margin: 0 15px;
+        }
+        nav ul li a {
+            color: #ffffff;
+            text-decoration: none;
+            transition: color 0.3s ease-in-out;
+        }
+        nav ul li a:hover {
+            color: #00adb5;
+        }
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-in-out, transform 0.8s ease-in-out;
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .project {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 10px;
+            text-align: center;
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+        .project:hover {
+            transform: scale(1.1);
+            background: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+        }
+        .dark-mode {
+            background: #121212;
+            color: #ffffff;
+        }
+        #darkModeToggle {
+            margin: 20px;
+            padding: 10px;
+            background: #00adb5;
+            border: none;
+            color: white;
+            cursor: pointer;
+            transition: background 0.3s ease-in-out;
+        }
+        #darkModeToggle:hover {
+            background: #007a7e;
+        }
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>My Portfolio</h1>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+        <button id="darkModeToggle">Toggle Dark Mode</button>
+    </header>
+    
+    <section id="home" class="reveal">
+        <h2>Welcome to My Portfolio</h2>
+        <p>Hi, I'm a cyber security student with a passion for ethical hacking and web security!</p>
+        <img src="profile.jpg" alt="Profile Picture" width="200">
+    </section>
+    
+    <section id="about" class="reveal">
+        <h2>About Me</h2>
+        <p>I'm a Cyber Security student with a strong interest in penetration testing and ethical hacking. I also have basic knowledge of frontend development.</p>
+    </section>
+    
+    <section id="projects" class="reveal">
+        <h2>Projects</h2>
+        <div class="project">Portfolio Website</div>
+        <div class="project">Phone Call Intrusion Challenge</div>
+        <div class="project">Scientific Calculator Using Python</div>
+    </section>
+    
+    <section id="contact" class="reveal">
+        <h2>Contact Me</h2>
+        <p>Email: example@email.com</p>
+    </section>
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let elements = document.querySelectorAll(".reveal");
+            function reveal() {
+                elements.forEach((el) => {
+                    let windowHeight = window.innerHeight;
+                    let elementTop = el.getBoundingClientRect().top;
+                    let elementVisible = 100;
+                    if (elementTop < windowHeight - elementVisible) {
+                        el.classList.add("visible");
+                    }
+                });
+            }
+            window.addEventListener("scroll", reveal);
+            reveal();
+
+            document.getElementById("darkModeToggle").addEventListener("click", function () {
+                document.body.classList.toggle("dark-mode");
+            });
+        });
+    </script>
+</body>
+</html>
