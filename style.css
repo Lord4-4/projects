@@ -1,0 +1,68 @@
+body {
+    background-color: #1a1a2e;
+    color: #e0e0e0;
+    font-family: Arial, sans-serif;
+    overflow-x: hidden;
+}
+
+header {
+    background: #16213e;
+    padding: 20px;
+    text-align: center;
+    animation: fadeInDown 1s ease-in-out;
+}
+
+.project:hover {
+    background-color: #0f3460;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease-in-out, transform 0.8s ease-in-out;
+}
+
+.reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes popUp {
+    from {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.project:hover {
+    animation: popUp 0.3s ease-in-out;
+}
+
+button {
+    background-color: #0f3460;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
+}
+
+button:hover {
+    background-color: #e94560;
+}
